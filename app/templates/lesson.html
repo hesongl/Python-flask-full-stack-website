@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="margin:0 auto; width:70%; border:1px solid #FFF;">
+
+<ol class="breadcrumb">
+    <li><a href="/course/{{lesson.courseID}}">{{lesson.course}}</a></li>
+    <li class="active">{{lesson.name}}</a></li>
+</ol>
+
+{% if userName == lesson.teacher %}
+  <div>
+     <a href="/lessonF/{{lesson.id}}"><B>Modify course contents<B></a>
+  </div>
+{% endif %}
+
+
+<h1>{{lesson.name}}</h1>
+<div style="text-align:right">
+<h2> {{lesson.teacher}} </h2></div>
+
+{{lesson.context}}
+
+<div style="text-align:right">
+<p>{{lesson.rdtime}}</p></div>
+</div><br><br>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="margin:0 auto; width:70%; border:1px solid #FFF;">
+
+{% if userName == "admin" %}
+  <div>
+     <a href="/adminContestAdd"><B>Add new problem set<B></a>
+  </div>
+{% endif %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Problem set name</th>
+      <th>Contributer</th>
+      <th>Starting time</th>
+      <th>Total time</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for contest in contests %}
+    <tr>
+      <td>xxx</td>
+      <td><a href="/contest/{{contest.id}}">{{contest.name}}</td>
+      <td>{{contest.creator}}</td>
+      <td>{{contest.bgdate}}</td>
+      <td>{{contest.length}}</td>
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+</div>
+{% endblock %}

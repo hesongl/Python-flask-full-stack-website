@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <div>
+        <div style="float:left;border:1px;width:75%;"}>
+
+        <div style="margin:0 auto; width:70%; border:1px solid #FFF;">
+
+        {% if userName %}
+	     <a href="/adminBlogAdd"><h3>Add new blog</h3></a>
+        {% endif %}
+	</div>
+
+            {% for blog in blogs %}
+                <div style="margin:0 auto; width:70%; border:1px solid #FFF;">
+                <h1> {{blog.title}}</a> </h1>
+		{% if userName == blog.author %}
+	  	<div>
+	     		<a href="/adminBlogDelete/{{blog.id}}"><h3>Delete blog</h3></a>
+	  	</div>
+		{% endif %}
+
+
+                <div style="text-align:right">
+                    <h2> {{blog.author}} </h2>
+                </div>
+                <div style="margin:0 auto; border-left:0px solid #000;">
+
+                    <div class="table table-condensed" style="word-break:break-all; word-wrap:break-all;">
+                        <blockquote>{{blog.context}}</blockquote>
+                    </div>
+
+                </div>
+                <div style="text-align:right">
+                    <p>{{blog.datetime}}</p></div>
+                </div><br><br>
+            {% endfor %}
+        </div>
+
+
+        <div style="margin;float:right;border:1px;width:25%;"}>
+
+            <div class="panel panel-primary" align:center; style="width:90%;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New Messages</h3>
+                </div>
+                <div class="panel-body">
+		{% if userName %}
+			{% for message in messages %}
+                            <a href="/message.html"><span class="glyphicon glyphicon-remove"></a></span> 
+			    <a href="/message.html">{{message.source}}</a>: {{message.context}}<br>
+			{% endfor %}
+		{% else %}
+                    <a href=#><span class="glyphicon glyphicon-remove"></a></span> 
+                    <a href=#>system</a>: Login to check new messages!<br>
+		{% endif %}
+                </div>
+            </div>
+
+            <div class="panel panel-info" align:center; style="width:90%;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Recent contest</h3>
+                </div>
+                <div class="panel-body">
+		    {% for contest in contests %}
+		    <a href=#> {{contest.name}} </a><br>
+		    {% endfor %}
+                </div>
+            </div>
+
+            <div class="panel panel-warning" align:center; style="width:90%;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Recent status</h3>
+                </div>
+                <div class="panel-body">
+		    {% for submission in submissions %}
+		    <a href="/code/{{submission.id}}"> #{{submission.id}} : {{submission.problemID}} {{submission.status}} </a><br>
+		    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

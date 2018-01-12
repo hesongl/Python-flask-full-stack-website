@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="{{url_for('adminProblemAdd')}}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Problem name</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="name" id="name" placeholder="Problem name here">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="context" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-5">
+      <textarea class="form-control" rows="9" name="context" id="context" placeholder="Please use markdown"></textarea>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="input" class="col-sm-2 control-label">Example Input</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="input" id="input" placeholder="Example Input here">
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label for="output" class="col-sm-2 control-label">Example Output</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="output" id="output" placeholder="Example output here">
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <label for="hint" class="col-sm-2 control-label">Hints</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="hint" id="hint" placeholder="Your hints for the problem">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="addtion" class="col-sm-2 control-label">Notes</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="addtion" id="addtion" placeholder="Notes here">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="memlim" class="col-sm-2 control-label">Memory limit(KB)</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="memlim" id="memlim" placeholder="Please input the memory limit">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="timlim" class="col-sm-2 control-label">Time limit(ms)</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="timlim" id="timlim" placeholder="Please input the time limit">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="inputF" class="col-sm-2 control-label">Choose input test file</label>
+    <div class="col-sm-2">
+      <input type="file" name="inputF" id="inputF">
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <label for="outputF" class="col-sm-2 control-label">choose output test file</label>
+    <div class="col-sm-2">
+      <input type="file" name="outputF" id="outputF">
+    </div>
+  </div>
+ 
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

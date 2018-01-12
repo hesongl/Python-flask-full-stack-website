@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+  <div style="width:80%; margin: 0 auto;">
+    <H3>{{problem.id}}. {{problem.name}}</H3>
+      <ul class="nav nav-tabs">
+		<li {% if problemPage == "description" %}class="active" {% endif %}>
+			<a href="/problem/{{problem.id}}/description">
+				<img src="{{ url_for('static', filename="img/description.png")}}" width="15">Description
+			</a>
+		</li>
+		<li {% if problemPage == "hint" %}class="active" {% endif %}>
+			<a href="/problem/{{problem.id}}/hint">
+				<img src="{{ url_for('static', filename="img/hint.png")}}" width="15">Hints
+			</a>
+		</li>
+		<li {% if problemPage == "submission" %}class="active" {% endif %}>
+			<a href="/problem/{{problem.id}}/submission">
+				<img src="{{ url_for('static', filename="img/submission.png")}}" width="15">Submit
+			</a>
+		</li>
+		<li {% if problemPage == "solution" %}class="active" {% endif %}>
+			<a href="/problem/{{problem.id}}/solution">
+				<img src="{{ url_for('static', filename="img/solution.png")}}" width="15">Solutions
+			</a>
+		</li>
+      </ul>
+
+      <br>
+
+      {% if problemPage == "description" %}
+      <h4>Problem description</h1>
+      <p>
+      	{{problem.context}}
+      </p>
+
+      <h4>Input</h1>
+      <p>
+      	{{problem.input}}
+      </p>
+
+      <h4>Output</h1>
+      <p>
+      	{{problem.output}}
+      </p>
+
+      <hr>
+      {% if userName %}
+      <div class="btn-group">
+   	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100%;">C++
+          <span class="caret"></span>
+        </button>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="#" align='center'>Java</a>
+        </li>
+        <li>
+          <a href="#" align='center'>C</a>
+        </li>
+        <li>
+          <a href="#" align='center'>Ruby</a>
+        </li>
+        <li>
+          <a href="#" align='center'>Python</a>
+        </li>
+      </ul>
+
+      </div>
+
+      <button type="button" class="btn btn-default">Reset</button>
+      <button type="button" class="btn btn-default">Back</button>	
+
+	  <div class="btn-group" style="float: right";>
+   	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100%;">monokai
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="#" align='center'>terminal</a>
+          </li>
+          <li>
+            <a href="#" align='center'>Xcode</a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+<br>
+<br>
+<div align="center" width="90%">
+  <div class="" id="compile-editor-div">
+<div id="editor" name="" class=" form-control">
+
+</div>
+</div>
+<script>
+$('#editor').height(600);
+</script>
+<style type="text/css" media="screen">
+#editor{
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+</style>
+
+<script>
+require("ace/ext/old_ie");
+ace.require("ace/ext/language_tools");
+var editor = ace.edit("editor");
+editor.$blockScrolling = Infinity;
+editor.setFontSize(16);
+editor.session.setMode("ace/mode/c_cpp");
+editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: true
+});
+editor.setTheme("ace/theme/monokai");
+
+$(document).ready(function(){
+	$("#codeSubmit").click(function (){
+		$.post("/codeSubmit",{
+			source: editor.getValue(),
+			language: "C++",
+			problemID: "{{problem.id}}"
+		});
+		window.location.href='/problem/{{problem.id}}/submission';
+	});
+});
+
+</script>
+
+  <div style="float:clear;"> </div>
+</div>
+{% if userName %}
+  <br>
+		    <button type="button" class="btn btn-default">Reset</button>
+        <button type="button" class="btn btn-default">Back</button>	
+        <button type="button" id="codeSubmit" class="btn btn-primary" style="float:right;background:skyblue;">Submit</button>
+        <button type="button" class="btn btn-primary" style="float:right;background:green;">Test</button>
+{% endif %}
+}
+</div>
+
+
+
+<script>
+
+</script>
+
+
+{% endif %}
+{% if problemPage == "hint" %}
+	{{problem.hint}}
+{% endif %}
+{% if problemPage == "submission" %}
+	<div style="width:80%;margin:0 auto;text-align:center;">
+      <table class="table table-striped">
+
+        <thead>
+          <tr>
+            <th style="text-align:center">submit Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">problem <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Status <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Run Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Memory <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Language <button type="button" style="background:transparent; border:0"></button></th>
+          </tr>
+        </thead>
+        <tbody>
+	{% for submission in submissions %}
+        <tr>
+          <td>{{submission.submitTime}}</td>
+          <td>{{submission.problemID}}</td>
+          <td><a href="/code/{{submission.id}}" style="color:{{submission.color}}">{{submission.status}}</a></td>
+          <td>{{submission.runTime}}</a></td>
+          <td>{{submission.memory}}</td>
+          <td>{{submission.language}}</td>
+        </tr>
+	{% endfor %}
+	 	</tbody>
+
+    </table>
+  </div>
+
+{% endif %}
+{% if problemPage == "solution" %}
+<div style="width:80%;margin:0 auto;text-align:center;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="text-align:center">submit Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">user name<button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">problem <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Status <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Run Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Memory <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Language <button type="button" style="background:transparent; border:0"></button></th>
+          </tr>
+        </thead>
+        <tbody>
+	{% for submission in solutions %}
+        <tr>
+          <td>{{submission.submitTime}}</td>
+          <td>{{submission.userName}}</td>
+          <td>{{submission.problemID}}</td>
+          <td><a href="/code/{{submission.id}}" style="color:{{submission.color}}">{{submission.status}}</a></td>
+          <td>{{submission.runTime}}</a></td>
+          <td>{{submission.memory}}</td>
+          <td>{{submission.language}}</td>
+        </tr>
+	{% endfor %}
+	 	</tbody>
+
+    </table>
+  </div>
+{% endif %}
+{% if problemPage == "code" %}
+	<p>
+		{{submission.code}}
+	<p>
+{% endif %}
+  </div>
+
+
+{% endblock %}

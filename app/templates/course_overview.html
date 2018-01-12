@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="margin:0 auto; width:80%; border:1px solid #FFF;">
+
+<h1>{{course.name}}</a> </h1>
+<div style="text-align:right">
+<h2> {{course.teacher}} </h2></div>
+
+<div style="margin:0 auto; border-left:0px solid #000;">
+
+<div class="table table-condensed" style="word-break:break-all; word-wrap:break-all;">
+<blockquote>
+{{course.dsp}}
+</blockquote>
+</div>
+
+</div>
+<div style="text-align:right">
+<p>{{course.rdtime}}</p></div>
+</div>
+
+
+<div style="margin: 0 auto; width:75%;">
+
+{% if userName == course.teacher %}
+  <div>
+     <a href="/lessonAdd/{{course.id}}"><B>Add new contents<B></a>
+  </div>
+{% endif %}
+
+<table class="table table-striped">
+  	<thead>
+    		<tr>
+{% if userName == course.teacher %}
+  <th>
+  </th>
+{% endif %}
+      			<th>Course name</th>
+      			<th>Update time</th>
+    		</tr>
+  	</thead>
+ 	<tbody>
+ 	{% for lesson in lessons %}
+		<tr>
+{% if userName == course.teacher %}
+  <td>
+     <a href="/lessonDelete/{{lesson.id}}"><B>Delete contents<B></a>
+  </td>
+{% endif %}
+			<td> <a href="/lesson/{{lesson.id}}">{{lesson.name}}</a></td>
+			<td> {{lesson.rdtime}}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+</div>
+{% endblock %}

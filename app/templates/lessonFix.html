@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/lessonF/{{lesson.id}}" method="post" class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Title</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="name" id="name" value="{{lesson.name}}" placeholder="Unit title here">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="context" class="col-sm-2 control-label">Contents</label>
+    <div class="col-sm-5">
+      <textarea class="form-control" rows="9" name="context" id="context" placeholder="Please use markdown">{{lesson.context}}</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

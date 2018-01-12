@@ -1,0 +1,7 @@
+False
+False
+6367c48dd193d56ea7b0baad25b19455e529f5ee
+True
+2a43ccf990c46a5279c52acdb2dee3ab748c8e95
+False
+(1, 'ä¸»é¡µç®\x80ä»\x8b', '/home', 'admin', 'ä¸»é¡µç\x94¨äº\x8eå±\x95ç¤ºä¸\x80äº\x9bå\x85¬å\x91\x8aä¿¡æ\x81¯ï¼\x8cå½\x93ç\x84¶ï¼\x8cè¿\x99äº\x9bå\x85¬å\x91\x8aä¿¡æ\x81¯ä¸»è¦\x81ç\x94±å®\x98æ\x96¹è¿\x9bè¡\x8cå\x8f\x91å¸\x83ã\x80\x82', datetime.datetime(2017, 4, 24, 20, 10, 54))

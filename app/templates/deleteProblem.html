@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="{{url_for('deleteProblem')}}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Problem id</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" name="id" id="id" placeholder="Problem id to be deleted here">
+    </div>
+  </div>
+
+{% endblock %}

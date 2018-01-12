@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"> 
+    <title> Lytecode OJ </title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+    
+    <script src="http://cdn.bootcss.com/ace/1.2.4/ace.js"></script>
+    <script src="http://cdn.bootcss.com/ace/1.2.4/ext-language_tools.js"></script>
+    <script src="http://cdn.bootcss.com/ace/1.2.4/ext-old_ie.js"></script>
+    <script src="http://cdn.bootcss.com/ace/1.2.4/theme-monokai.js"></script>
+
+
+<!---
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.post("/try/ajax/demo_test_post.php",{
+			name:"菜鸟教程",
+			url:"http://www.runoob.com"
+		},
+		function(data,status){
+			alert("数据: \n" + data + "\n状态: " + status);
+		});
+	});
+});
+</script>
+-->
+
+</head>
+
+<body>
+    <div style="border:1px;background:#FFF;"}>
+    <nav class="navbar navbar-default" role="navigation">
+        <div align="center" style="width:95%;margin:0 auto;">
+            <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Lytecode OJ</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li {% if page and page == "home" %} class="active" {% endif %}> <a href="/home">HomePage</a></li>
+                    <li {% if page and page == "courses" %} class="active" {% endif %}> <a href="/courses">Course</a></li>
+                    <li {% if page and page == "contests" %} class="active" {% endif %}> <a href="/contests">Sample</a></li>
+                    <li {% if page and page == "problems" %} class="active" {% endif %}> <a href="/problems/problemList">Questions</a></li>
+                </ul>
+            </div>
+
+            <div style="float:right";>
+                <ul class="nav navbar-nav">
+		    {% if userName %}
+                    <li><div class="dropdown">
+                        <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" 
+				data-toggle="dropdown" style="height:50px;background: transparent;">
+				<a href="/info">{{userName}}</a>
+                            <span class="caret"></span>
+            		</button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+				{% if userName == "admin" %}
+                                <a role="menuitem" tabindex="-1" href="/adminBlogAdd">add blog</a>
+				{% endif %}
+                                <!---
+                                <a role="menuitem" tabindex="-1" href="/profile">Profile</a>
+                                <a role="menuitem" tabindex="-1" href="/message">Message</a>
+                                <a role="menuitem" tabindex="-1" href="/help">Help</a>
+                                -->
+                                <a role="menuitem" tabindex="-1" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div></li>
+		    {% else %}
+		    <li><a href="/login">Login</a></li>
+		    <li><a href="/regist">Register</a></li>
+		    {% endif %}
+		</ul>
+            </div>
+	</div>
+    </nav>
+    </div>
+
+{% block content %}
+{% endblock %}
+
+   <br>
+   <div align="center">
+     <a href="#">Frequently Asked Questions</a> | 
+     <a href="#">Terms of Service</a><br>
+     Copyright &copy; 2017 LLCOJ 
+   </div><br>
+
+</body>
+</html>

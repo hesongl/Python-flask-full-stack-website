@@ -1,0 +1,30 @@
+<div style="width:80%;margin:0 auto;text-align:center;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="text-align:center">submit Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">user name<button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">problem <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Status <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Run Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Memory <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Language <button type="button" style="background:transparent; border:0"></button></th>
+          </tr>
+        </thead>
+        <tbody>
+	{% for submission in solutions %}
+        <tr>
+          <td>{{submission.submitTime}}</td>
+          <td>{{submission.userName}}</td>
+          <td>{{submission.problemID}}</td>
+          <td><a href="/code/{{submission.id}}" style="color:{{submission.color}}">{{submission.status}}</a></td>
+          <td>{{submission.runTime}}</a></td>
+          <td>{{submission.memory}}</td>
+          <td>{{submission.language}}</td>
+        </tr>
+	{% endfor %}
+	 	</tbody>
+
+    </table>
+  </div>
+

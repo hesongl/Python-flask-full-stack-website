@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+    <div style="width:80%;margin:0 auto;text-align:left;">
+<ul class="nav nav-tabs">
+  <li {% if problemsPage == "problemList" %}class="active"{% endif %}><a href="/problems/problemList">Problem lists</a></li>
+  <li {% if problemsPage == "submissionList" %}class="active"{% endif %}><a href="/problems/submissionList">Submit</a></li>
+  <li {% if problemsPage == "rank" %}class="active"{% endif %}><a href="/problems/rank">Ranking</a></li>
+</ul>
+    </div>
+</div>
+
+  <div>
+    <div style="border:1px;background:#FFF;"}>
+    <!--<div style="width:80%; float:left;">-->
+    <div style="width:80%;">
+    <div style="width:80%;margin:0 auto;text-align:left;">
+
+
+	     <a href="/adminProblemAdd"><B>Add a new problem<B></a>
+
+{% if problemsPage == "problemList" %}
+
+<table class="table table-striped">
+        <thead>
+      	  <tr>
+              <th style="text-align:left;"></th>
+      	  	  <th style="text-align:left;">ID <button type="button" style="background:transparent; border:0"></button></th>
+      	  	  <th style="text-align:left;">Title <button type="button" style="background:transparent; border:0"></button></th>
+      		  <th style="text-align:left;">Difiiculty <button type="button" style="background:transparent; border:0"></button></th>
+      	  </tr>
+        </thead>
+        <tbody>
+	{% for problem in problems %}
+		<tr> 
+			<td></td>
+			<td>{{problem.id}}</td>
+			<td><a href="/problem/{{problem.id}}">{{problem.name}}</a></td>
+			<td>{{problem.difficulty}}</td>
+  {% if userName %}
+      <td>
+         <a href="/deleteProblem/{{problem.id}}"><B>Delete the problem<B></a>
+      </td>
+		</tr>
+  {% endif %}
+	{% endfor %}
+
+ 	</tbody>
+      </table>
+
+    </div>
+    </div>
+    </div>
+
+
+<!--
+ <div style="width:20%; float:right;">
+
+      <div class="panel panel-default" style="width:90%;">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Popular
+          </h3>
+        </div>
+        <div class="panel-body">
+          1 ( a + b )
+        </div>
+      </div>
+
+      <div class="panel panel-default" style="width:90%;">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            New
+          </h3>
+        </div>
+        <div class="panel-body">
+          1 ( a + b )
+        </div>
+      </div>
+
+      <div class="panel panel-default" style="width:90%;">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Tag
+          </h3>
+        </div>
+        <table class="table">
+          <tr><td>array <span class="badge">12</span></td></tr>
+          <tr><td>string <span class="badge">5</span></td></tr>
+        </table>
+      </div>
+
+    </div>
+-->
+</div>
+
+{% endif %}
+
+{% if problemsPage == "submissionList" %}
+<div style="width:80%;margin:0 auto;text-align:center;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="text-align:center">submit Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">user name<button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">problem <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Status <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Run Time <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Memory <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">Language <button type="button" style="background:transparent; border:0"></button></th>
+          </tr>
+        </thead>
+        <tbody>
+	{% for submission in submissions %}
+        <tr>
+          <td>{{submission.submitTime}}</td>
+          <td>{{submission.userName}}</td>
+          <td>{{submission.problemID}}</td>
+          <td><a href="/code/{{submission.id}}" style="color:{{submission.color}}">{{submission.status}}</a></td>
+          <td>{{submission.runTime}}</a></td>
+          <td>{{submission.memory}}</td>
+          <td>{{submission.language}}</td>
+        </tr>
+	{% endfor %}
+	 	</tbody>
+
+    </table>
+  </div>
+
+{% endif %}
+
+{% if problemsPage == "rank" %}
+<div style="width:80%;margin:0 auto;text-align:center;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="text-align:center">rank<button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">user name <button type="button" style="background:transparent; border:0"></button></th>
+            <th style="text-align:center">pass number <button type="button" style="background:transparent; border:0"></button></th>
+          </tr>
+        </thead>
+        <tbody>
+	{% for user in rankList %}
+        <tr>
+	  <td>{{user.rank}}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.pNum}}</td>
+        </tr>
+	{% endfor %}
+	 	</tbody>
+
+    </table>
+  </div>
+
+{% endif %}
+
+
+
+{% endblock %}

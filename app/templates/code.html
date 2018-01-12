@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+  <div style="width:80%; margin: 0 auto;">
+
+<p><B> submitTime </B> : {{code.submitTime}}<br>
+<B> userName </B> : {{code.userName}}<br>
+<B> problemID </B> : {{code.problemID}}<br>
+<B> runTime </B> : {{code.runTime}}<br>
+<B> memory </B> : {{code.memory}}<br>
+<B> language </B> : {{code.language}}</p><br>
+
+<br>
+<div align="center" width="90%">
+  <div class="" id="compile-editor-div">
+<div id="editor" name="" class=" form-control">{{code.source}}
+</div>
+</div>
+<script>
+$('#editor').height(600);
+</script>
+<style type="text/css" media="screen">
+#editor{
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+</style>
+
+<script>
+require("ace/ext/old_ie");
+ace.require("ace/ext/language_tools");
+var editor = ace.edit("editor");
+editor.$blockScrolling = Infinity;
+editor.setFontSize(16);
+editor.session.setMode("ace/mode/c_cpp");
+editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: true
+});
+editor.setTheme("ace/theme/monokai");
+</script>
+
+
+  <div style="float:clear;"> </div>
+</div>
+  <br>
+        <!---
+		    <button type="button" class="btn btn-default">Reset</button>
+        <button type="button" class="btn btn-default">Back</button>	
+        <button type="button" class="btn btn-primary" style="float:right;background:skyblue;"><a href="submissionList_waiting2.html">Submit</a></button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" style="float:right;background:green;">Test</button>-->
+</div>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+#include "database/MyDB.h"
+#include <iostream>
+#include <utility>
+#include <string>
+#include <sstream>
+
+int strToNum(std::string s){
+	std::stringstream sbuf;
+	int res;
+	sbuf << s;
+	sbuf >> res;
+	return res;
+}
+
+template<class T>
+std::string toStr(T t){
+	std::stringstream sbuf;
+	sbuf << t;
+	std::string res;
+	sbuf >> res;
+	return res;
+}
+
+class DBoperator{
+private:
+	MyDB db;
+public:
+	DBoperator();
+	void debugOut(std::string s);
+	std::vector<int> getWatingID();
+	std::pair<std::string, std::string> readCode(const int ID);
+	int setSubmissionStatus(const int ID, const int status);
+};
+
+DBoperator::DBoperator(){
+	db.initDB("localhost", "root", "qzlr1021", "oj");
+}
+
+void DBoperator::debugOut(std::string s){
+	std::cout << s << std::endl;
+}
+
+std::vector<int> DBoperator::getWatingID(){
+	std::vector<std::string> SQL_ans;
+	std::vector<int> res;
+	std::string command;
+	command = "SELECT id FROM submission where status = 0";
+	if (db.exeSQL(command, SQL_ans)) {
+		for (int i = 0; i < SQL_ans.size(); ++i) {
+			res.push_back(strToNum(SQL_ans[i]));
+		}
+	}
+	return res;
+}
+
+std::pair<std::string, std::string> DBoperator::readCode(const int ID){
+	std::vector<std::string> SQL_ans;
+	std::vector<int> res;
+	std::string command;
+	command = std::string("SELECT language, source FROM submission where id = ") +
+		"\"" + toStr(ID) + "\"";
+	if (db.exeSQL(command, SQL_ans)) {
+		return std::make_pair(SQL_ans[0], SQL_ans[1]);
+	}
+	return std::make_pair("", "");
+}
+
+int DBoperator::setSubmissionStatus(const int ID, const int status){
+	std::vector<std::string> SQL_ans;
+	std::vector<int> res;
+	std::string command;
+	command = std::string("UPDATE submission SET status = ") +
+		"\"" + toStr(status) + "\"" + " where id = " +
+		"\"" + toStr(ID) + "\"";
+	debugOut(command);
+	return db.exeSQL(command, SQL_ans);
+}
+
+using namespace std;
+
+int main(){
+	DBoperator test;
+	for (int i = 0; i < 25; ++i) {
+		test.setSubmissionStatus(i, 0);
+	}
+	std::vector<int> IDs = test.getWatingID();
+	std::cout << IDs.size() << std::endl;
+	for (int i = 0; i < IDs.size(); ++i) {
+		std::pair<std::string, std::string> code = test.readCode(IDs[i]);
+		std::cout << "ID: " << IDs[i] << " language: " << code.first << std::endl;
+		std::cout << code.second << std::endl;
+		test.setSubmissionStatus(IDs[i], 3);
+	}
+	return 0;
+}
